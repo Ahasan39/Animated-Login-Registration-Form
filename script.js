@@ -2,19 +2,43 @@
  * Animated Login & Registration Form - Interaction & Laravel Mode Helper
  * Handles:
  * 1. Smooth toggling between Login and Register views (.wrapper.active)
- * 2. URL hash (#register / #login) & query param (?mode=register / ?mode=login) synchronization
+ * 2. Dynamic mobile card height synchronization for silky-smooth cubic-bezier transitions
+ * 3. URL hash (#register / #login) & query param (?mode=register / ?mode=login) synchronization
  *    so Laravel redirects or validation errors can open the target view automatically
- * 3. Interactive password visibility toggle & input value/focus state helpers
+ * 4. Interactive password visibility toggle & input value/focus state helpers
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.getElementById('authWrapper');
     const registerLink = document.querySelector('.register-link');
     const loginLink = document.querySelector('.login-link');
+    const loginFormBox = document.querySelector('.form-box.login');
+    const registerFormBox = document.querySelector('.form-box.register');
     const loginInfo = document.querySelector('.info-text.login');
     const registerInfo = document.querySelector('.info-text.register');
     const toast = document.getElementById('statusToast');
     let toastTimer = null;
+
+    /**
+     * Calculates and applies the exact mobile card height based on the active form panel
+     * so switching between Login and Register animates smoothly without layout snapping.
+     */
+    function syncMobileCardHeight() {
+        if (!wrapper) return;
+
+        if (window.innerWidth <= 599) {
+            const isRegister = wrapper.classList.contains('active');
+            const activePanel = isRegister ? registerFormBox : loginFormBox;
+            if (activePanel) {
+                const bannerOffset = activePanel.offsetTop || 142;
+                const panelHeight = activePanel.scrollHeight || activePanel.offsetHeight;
+                const targetHeight = bannerOffset + panelHeight + 4;
+                wrapper.style.setProperty('--mobile-card-height', `${targetHeight}px`);
+            }
+        } else {
+            wrapper.style.removeProperty('--mobile-card-height');
+        }
+    }
 
     /**
      * Switches between 'login' and 'register' modes smoothly
@@ -34,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         wrapper.classList.toggle('active', isRegister);
+        syncMobileCardHeight();
 
         // Update ARIA visibility on welcome panels
         if (loginInfo && registerInfo) {
@@ -82,6 +107,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialMode = detectInitialModeFromUrl();
     if (initialMode === 'register') {
         setAuthMode('register', { updateUrl: false, instant: true });
+    } else {
+        syncMobileCardHeight();
+    }
+
+    // Re-sync mobile card height on viewport resize or font load
+    window.addEventListener('resize', syncMobileCardHeight);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncMobileCardHeight);
     }
 
     // In-card "Sign Up" and "Sign In" toggle links

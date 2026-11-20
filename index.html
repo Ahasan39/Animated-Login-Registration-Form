@@ -28,7 +28,7 @@
              LOGIN FORM PANEL (Left Side in Login Mode)
              ========================================== -->
         <section class="form-box login" aria-labelledby="loginHeading">
-            <h2 class="title animation" id="loginHeading" style="--i:0; --j:21;">Login</h2>
+            <h2 class="title animation" id="loginHeading" style="--i:0; --j:21; --m:0;">Login</h2>
 
             <!-- Laravel Action Example: action="{{ route('login') }}" method="POST" -->
             <form action="/login" method="POST" id="loginForm" novalidate>
@@ -37,7 +37,7 @@
                 -->
 
                 <!-- Username / Email Field -->
-                <div class="input-box animation" style="--i:1; --j:22;">
+                <div class="input-box animation" style="--i:1; --j:22; --m:1;">
                     <!-- Laravel Blade value binding: value="{{ old('email') }}" -->
                     <input
                         type="text"
@@ -62,7 +62,7 @@
                 </div>
 
                 <!-- Password Field -->
-                <div class="input-box animation" style="--i:2; --j:23;">
+                <div class="input-box animation" style="--i:2; --j:23; --m:2;">
                     <input
                         type="password"
                         id="login-password"
@@ -96,12 +96,12 @@
                 </div>
 
                 <!-- Primary Login CTA -->
-                <div class="action-box animation" style="--i:3; --j:24;">
+                <div class="action-box animation" style="--i:3; --j:24; --m:3;">
                     <button type="submit" class="btn-primary">Login</button>
                 </div>
 
                 <!-- Continue with Google Button -->
-                <div class="google-box animation" style="--i:4; --j:25;">
+                <div class="google-box animation" style="--i:4; --j:25; --m:4;">
                     <!-- Laravel Socialite Route Example: href="{{ route('auth.google.redirect') }}" -->
                     <a href="#google-login" class="btn-google" role="button">
                         <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
@@ -115,7 +115,7 @@
                 </div>
 
                 <!-- Switch to Register Mode -->
-                <div class="logreg-link animation" style="--i:5; --j:26;">
+                <div class="logreg-link animation" style="--i:5; --j:26; --m:5;">
                     <p>Don't have an account ? <a href="?mode=register#register" class="register-link">Sign Up</a></p>
                 </div>
             </form>
@@ -125,8 +125,8 @@
              LOGIN WELCOME MESSAGE (Right Diagonal Panel)
              ========================================== -->
         <aside class="info-text login" aria-hidden="false">
-            <h2 class="animation" style="--i:0; --j:20;">WELCOME<br>BACK!</h2>
-            <p class="animation" style="--i:1; --j:21;">
+            <h2 class="animation" style="--i:0; --j:20; --m:0;">WELCOME <br>BACK!</h2>
+            <p class="animation" style="--i:1; --j:21; --m:1;">
                 Sign in to access your dashboard, monitor live activity, and manage your account securely.
             </p>
         </aside>
@@ -135,7 +135,7 @@
              REGISTER FORM PANEL (Right Side in Register Mode)
              ========================================== -->
         <section class="form-box register" aria-labelledby="registerHeading">
-            <h2 class="title animation" id="registerHeading" style="--i:17; --j:0;">Register</h2>
+            <h2 class="title animation" id="registerHeading" style="--i:17; --j:0; --m:0;">Register</h2>
 
             <!-- Laravel Action Example: action="{{ route('register') }}" method="POST" -->
             <form action="/register" method="POST" id="registerForm" novalidate>
@@ -144,7 +144,7 @@
                 -->
 
                 <!-- Username Field (Laravel standard attribute: name="name") -->
-                <div class="input-box animation" style="--i:18; --j:1;">
+                <div class="input-box animation" style="--i:18; --j:1; --m:1;">
                     <!-- Laravel Blade value binding: value="{{ old('name') }}" -->
                     <input
                         type="text"
@@ -168,7 +168,7 @@
                 </div>
 
                 <!-- Email Field (Laravel standard attribute: name="email") -->
-                <div class="input-box animation" style="--i:19; --j:2;">
+                <div class="input-box animation" style="--i:19; --j:2; --m:2;">
                     <!-- Laravel Blade value binding: value="{{ old('email') }}" -->
                     <input
                         type="email"
@@ -193,7 +193,7 @@
                 </div>
 
                 <!-- Password Field (Laravel standard attribute: name="password") -->
-                <div class="input-box animation" style="--i:20; --j:3;">
+                <div class="input-box animation" style="--i:20; --j:3; --m:3;">
                     <input
                         type="password"
                         id="register-password"
@@ -225,7 +225,7 @@
                 </div>
 
                 <!-- Confirm Password Field (Laravel standard attribute: name="password_confirmation") -->
-                <div class="input-box animation" style="--i:21; --j:4;">
+                <div class="input-box animation" style="--i:21; --j:4; --m:4;">
                     <input
                         type="password"
                         id="register-password-confirm"
@@ -252,12 +252,12 @@
                 </div>
 
                 <!-- Primary Register CTA -->
-                <div class="action-box animation" style="--i:22; --j:5;">
+                <div class="action-box animation" style="--i:22; --j:5; --m:5;">
                     <button type="submit" class="btn-primary">Register</button>
                 </div>
 
                 <!-- Continue with Google Button -->
-                <div class="google-box animation" style="--i:23; --j:6;">
+                <div class="google-box animation" style="--i:23; --j:6; --m:6;">
                     <!-- Laravel Socialite Route Example: href="{{ route('auth.google.redirect') }}" -->
                     <a href="#google-register" class="btn-google" role="button">
                         <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
@@ -271,7 +271,7 @@
                 </div>
 
                 <!-- Switch to Login Mode -->
-                <div class="logreg-link animation" style="--i:24; --j:7;">
+                <div class="logreg-link animation" style="--i:24; --j:7; --m:7;">
                     <p>Already have an account ? <a href="?mode=login#login" class="login-link">Sign In</a></p>
                 </div>
             </form>
@@ -281,8 +281,8 @@
              REGISTER WELCOME MESSAGE (Left Diagonal Panel)
              ========================================== -->
         <aside class="info-text register" aria-hidden="true">
-            <h2 class="animation" style="--i:17; --j:0;">JOIN US<br>TODAY!</h2>
-            <p class="animation" style="--i:18; --j:1;">
+            <h2 class="animation" style="--i:17; --j:0; --m:0;">JOIN US <br>TODAY!</h2>
+            <p class="animation" style="--i:18; --j:1; --m:1;">
                 Create your account in seconds to unlock real-time tools, smart automation, and seamless access.
             </p>
         </aside>
