@@ -1,0 +1,766 @@
+/* ==========================================================================
+   Animated Login & Registration Form - Stylesheet
+   Matches reference neon crimson/hot-pink diagonal split design
+   Responsive across Desktop (>900px), Tablet (600px-900px), & Mobile (<600px)
+   ========================================================================== */
+
+:root {
+    --bg-outer: #16151c;
+    --bg-card: #1f1d24;
+    --neon-pink: #ff2770;
+    --neon-pink-bright: #ff2a78;
+    --neon-crimson: #a80943;
+    --neon-deep: #301524;
+    --text-white: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.88);
+    --border-glow: 0 0 26px rgba(255, 39, 112, 0.82), 0 0 8px rgba(255, 39, 112, 0.45);
+    --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: radial-gradient(circle at 50% 50%, #201e27 0%, #15141a 70%, #121116 100%);
+    color: var(--text-white);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Main Split-Screen Neon Card Wrapper (Desktop & Laptop > 900px)
+   ========================================================================== */
+.wrapper {
+    position: relative;
+    width: min(800px, 92vw);
+    max-width: 820px;
+    height: 510px;
+    background: var(--bg-card);
+    border: 2px solid var(--neon-pink);
+    box-shadow: var(--border-glow);
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s ease;
+}
+
+/* ==========================================================================
+   Diagonal Split Animated Background Panels
+   Anchored relative to 50% center so the diagonal divider stays centered
+   across both Desktop and Tablet widths without overlapping form fields.
+   ========================================================================== */
+.wrapper .bg-animate {
+    position: absolute;
+    top: -4px;
+    right: calc(50% - 400px);
+    width: 960px;
+    height: 645px;
+    background: linear-gradient(45deg, var(--bg-card) 12%, #6e1036 48%, var(--neon-pink) 95%);
+    border-bottom: 3px solid var(--neon-pink);
+    transform: rotate(10deg) skewY(40deg);
+    transform-origin: bottom right;
+    transition: 1.5s ease;
+    transition-delay: 1.6s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.wrapper.active .bg-animate {
+    transform: rotate(0) skewY(0);
+    transition-delay: 0.5s;
+}
+
+.wrapper .bg-animate2 {
+    position: absolute;
+    top: 100%;
+    left: calc(50% - 130px);
+    width: 960px;
+    height: 740px;
+    background: var(--bg-card);
+    border-top: 3px solid var(--neon-pink);
+    transform: rotate(0) skewY(0);
+    transform-origin: bottom left;
+    transition: 1.5s ease;
+    transition-delay: 0.5s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.wrapper.active .bg-animate2 {
+    transform: rotate(-11deg) skewY(-41deg);
+    transition-delay: 1.2s;
+}
+
+/* ==========================================================================
+   Form Containers (Login Left / Register Right)
+   ========================================================================== */
+.wrapper .form-box {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+}
+
+.wrapper .form-box.login {
+    left: 0;
+    padding: 0 42px 0 52px;
+}
+
+.wrapper .form-box.register {
+    right: 0;
+    padding: 0 52px 0 42px;
+    pointer-events: none;
+}
+
+.wrapper.active .form-box.register {
+    pointer-events: auto;
+}
+
+.wrapper.active .form-box.login {
+    pointer-events: none;
+}
+
+/* Staggered Slide & Blur Transitions for Form Items */
+.wrapper .form-box.login .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition: 0.7s ease;
+    transition-delay: calc(0.1s * var(--j));
+}
+
+.wrapper.active .form-box.login .animation {
+    transform: translateX(-125%);
+    opacity: 0;
+    filter: blur(8px);
+    transition-delay: calc(0.1s * var(--i));
+}
+
+.wrapper .form-box.register .animation {
+    transform: translateX(125%);
+    opacity: 0;
+    filter: blur(8px);
+    transition: 0.7s ease;
+    transition-delay: calc(0.1s * var(--j));
+}
+
+.wrapper.active .form-box.register .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(0.1s * var(--i));
+}
+
+/* Form Title */
+.form-box h2.title {
+    font-size: 31px;
+    font-weight: 700;
+    color: var(--text-white);
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+
+.form-box.register h2.title {
+    margin-bottom: 2px;
+}
+
+/* ==========================================================================
+   Underline Input Fields & Floating Labels
+   ========================================================================== */
+.form-box .input-box {
+    position: relative;
+    width: 100%;
+    height: 44px;
+    margin: 16px 0;
+}
+
+.form-box.register .input-box {
+    height: 40px;
+    margin: 11px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--text-white);
+    padding-right: 32px;
+    font-size: 14.5px;
+    color: var(--text-white);
+    font-weight: 500;
+    caret-color: var(--neon-pink-bright);
+    transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Keep dark background when browser autofills */
+.input-box input:-webkit-autofill,
+.input-box input:-webkit-autofill:hover,
+.input-box input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-white);
+    -webkit-box-shadow: 0 0 0px 1000px var(--bg-card) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.input-box input:focus,
+.input-box input:not(:placeholder-shown),
+.input-box.has-value input {
+    border-bottom-color: var(--neon-pink-bright);
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 14.5px;
+    font-weight: 400;
+    color: var(--text-white);
+    pointer-events: none;
+    transition: 0.35s ease;
+}
+
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown) ~ label,
+.input-box.has-value label {
+    top: -4px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--neon-pink-bright);
+}
+
+.input-box .input-icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    color: var(--text-white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 2px;
+    transition: color 0.35s ease, transform 0.2s ease;
+}
+
+.input-box .password-toggle {
+    cursor: pointer;
+}
+
+.input-box .password-toggle:hover {
+    color: var(--neon-pink-bright);
+}
+
+.input-box input:focus ~ .input-icon,
+.input-box input:not(:placeholder-shown) ~ .input-icon,
+.input-box.has-value .input-icon {
+    color: var(--neon-pink-bright);
+}
+
+/* Optional Laravel @error message helper styling */
+.field-error {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: #ff5c8d;
+}
+
+/* ==========================================================================
+   Primary Pill CTA Button & Google Button
+   ========================================================================== */
+.action-box {
+    margin-top: 16px;
+}
+
+.form-box.register .action-box {
+    margin-top: 12px;
+}
+
+.btn-primary {
+    position: relative;
+    width: 100%;
+    height: 42px;
+    background: transparent;
+    border: 2px solid var(--neon-pink);
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--text-white);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    z-index: 1;
+    overflow: hidden;
+    transition: box-shadow 0.35s ease, transform 0.2s ease;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    background: linear-gradient(
+        180deg,
+        var(--bg-card) 0%,
+        var(--neon-pink) 36%,
+        #5e0b2b 70%,
+        var(--bg-card) 100%
+    );
+    z-index: -1;
+    transition: 0.45s ease;
+}
+
+.btn-primary:hover::before {
+    top: 0;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 18px rgba(255, 39, 112, 0.75);
+}
+
+.btn-primary:active {
+    transform: scale(0.985);
+}
+
+/* Google Login Button */
+.google-box {
+    margin-top: 10px;
+}
+
+.form-box.register .google-box {
+    margin-top: 8px;
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 38px;
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 39, 112, 0.48);
+    border-radius: 40px;
+    color: var(--text-white);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-google:hover {
+    background: rgba(255, 39, 112, 0.14);
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 14px rgba(255, 39, 112, 0.45);
+}
+
+.btn-google:active {
+    transform: scale(0.985);
+}
+
+.google-icon {
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Bottom Mode Switcher Links ("Don't have an account ? Sign Up")
+   ========================================================================== */
+.form-box .logreg-link {
+    font-size: 13px;
+    color: var(--text-white);
+    text-align: center;
+    margin: 12px 0 2px;
+}
+
+.form-box.register .logreg-link {
+    margin: 9px 0 2px;
+}
+
+.logreg-link p a {
+    color: var(--neon-pink-bright);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 3px;
+    transition: text-shadow 0.25s ease;
+}
+
+.logreg-link p a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 10px rgba(255, 42, 120, 0.8);
+}
+
+/* ==========================================================================
+   Welcome Info Panels (Diagonal Gradient Overlay Content)
+   ========================================================================== */
+.wrapper .info-text {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.wrapper .info-text.login {
+    right: 0;
+    text-align: right;
+    padding: 0 44px 44px 130px;
+}
+
+.wrapper .info-text.register {
+    left: 0;
+    text-align: left;
+    padding: 0 130px 44px 44px;
+}
+
+.wrapper .info-text.login .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition: 0.7s ease;
+    transition-delay: calc(0.1s * var(--j));
+}
+
+.wrapper.active .info-text.login .animation {
+    transform: translateX(125%);
+    opacity: 0;
+    filter: blur(8px);
+    transition-delay: calc(0.1s * var(--i));
+}
+
+.wrapper .info-text.register .animation {
+    transform: translateX(-125%);
+    opacity: 0;
+    filter: blur(8px);
+    transition: 0.7s ease;
+    transition-delay: calc(0.1s * var(--j));
+}
+
+.wrapper.active .info-text.register .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(0.1s * var(--i));
+}
+
+.info-text h2 {
+    font-size: 35px;
+    font-weight: 800;
+    color: var(--text-white);
+    line-height: 1.18;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.info-text p {
+    font-size: 14.5px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+/* ==========================================================================
+   Toast Status Feedback
+   ========================================================================== */
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 22px;
+    max-width: calc(100vw - 32px);
+    background: rgba(31, 29, 36, 0.96);
+    border: 1.5px solid var(--neon-pink);
+    border-radius: 999px;
+    box-shadow: 0 0 20px rgba(255, 39, 112, 0.6);
+    color: var(--text-white);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    z-index: 100;
+    animation: toastFadeIn 0.25s ease;
+}
+
+@keyframes toastFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* ==========================================================================
+   Tablet Responsiveness (600px – 900px)
+   Scales typography, card width, and diagonal split padding smoothly
+   ========================================================================== */
+@media (max-width: 900px) and (min-width: 600px) {
+    .wrapper {
+        width: min(760px, 94vw);
+        height: 500px;
+    }
+
+    .wrapper .form-box.login {
+        padding: 0 28px 0 34px;
+    }
+
+    .wrapper .form-box.register {
+        padding: 0 34px 0 28px;
+    }
+
+    .wrapper .info-text.login {
+        padding: 0 30px 36px 96px;
+    }
+
+    .wrapper .info-text.register {
+        padding: 0 96px 36px 30px;
+    }
+
+    .form-box h2.title {
+        font-size: 27px;
+    }
+
+    .info-text h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .info-text p {
+        font-size: 13px;
+        line-height: 1.48;
+    }
+}
+
+/* Narrower tablets (600px – 700px): tighten diagonal text inset so it never touches the slant */
+@media (max-width: 700px) and (min-width: 600px) {
+    .wrapper .form-box.login {
+        padding: 0 20px 0 26px;
+    }
+
+    .wrapper .form-box.register {
+        padding: 0 26px 0 20px;
+    }
+
+    .wrapper .info-text.login {
+        padding: 0 22px 32px 78px;
+    }
+
+    .wrapper .info-text.register {
+        padding: 0 78px 32px 22px;
+    }
+
+    .info-text h2 {
+        font-size: 24px;
+    }
+
+    .info-text p {
+        font-size: 12.2px;
+    }
+}
+
+/* ==========================================================================
+   Mobile Responsiveness (< 600px, including 360px–430px phone screens)
+   Single-column layout with sleek angled top pink/crimson gradient header banner
+   ========================================================================== */
+@media (max-width: 599px) {
+    body {
+        padding: 16px 14px;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 410px;
+        height: 505px;
+        border-radius: 4px;
+    }
+
+    /* Smoothly expand card height in Register mode to fit 4 fields comfortably */
+    .wrapper.active {
+        height: 585px;
+    }
+
+    /* Sleek top diagonal pink/crimson gradient header banner */
+    .wrapper .bg-animate {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 134px;
+        background: linear-gradient(135deg, #28121f 0%, #8e1142 42%, var(--neon-pink) 100%);
+        border-bottom: none;
+        transform: none !important;
+        clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
+        transition: clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.6s ease;
+        transition-delay: 0s !important;
+    }
+
+    .wrapper.active .bg-animate {
+        background: linear-gradient(225deg, #28121f 0%, #8e1142 42%, var(--neon-pink) 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 82%);
+        transition-delay: 0s !important;
+    }
+
+    /* Accent neon line along the angled mobile banner edge */
+    .wrapper .bg-animate2 {
+        top: 108px;
+        left: -5%;
+        width: 110%;
+        height: 3px;
+        background: var(--neon-pink);
+        border: none;
+        box-shadow: 0 0 12px var(--neon-pink);
+        transform: rotate(-3.6deg) !important;
+        transform-origin: center;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transition-delay: 0s !important;
+    }
+
+    .wrapper.active .bg-animate2 {
+        transform: rotate(3.6deg) !important;
+        transition-delay: 0s !important;
+    }
+
+    /* Header Banner Welcome Copy */
+    .wrapper .info-text {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 120px;
+        justify-content: center;
+        align-items: center;
+        text-align: center !important;
+        padding: 14px 22px 18px !important;
+    }
+
+    .wrapper .info-text h2 {
+        font-size: 22px;
+        line-height: 1.15;
+        margin-bottom: 5px;
+        letter-spacing: 0.6px;
+    }
+
+    .wrapper .info-text h2 br {
+        display: none;
+    }
+
+    .wrapper .info-text p {
+        font-size: 12px;
+        line-height: 1.38;
+        max-width: 320px;
+    }
+
+    /* Full-width Form Area Below Header Banner */
+    .wrapper .form-box {
+        top: 124px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: calc(100% - 124px);
+        padding: 6px 26px 18px !important;
+        justify-content: center;
+    }
+
+    .form-box h2.title {
+        font-size: 25px;
+        margin-bottom: 6px;
+    }
+
+    .form-box.register h2.title {
+        font-size: 24px;
+        margin-bottom: 2px;
+    }
+
+    .form-box .input-box {
+        height: 42px;
+        margin: 13px 0;
+    }
+
+    .form-box.register .input-box {
+        height: 39px;
+        margin: 9px 0;
+    }
+
+    /* Snappy, responsive staggered animation timing on mobile */
+    .wrapper .form-box.login .animation,
+    .wrapper .info-text.login .animation {
+        transition: 0.45s ease;
+        transition-delay: calc(0.03s * (var(--j) - 20)) !important;
+    }
+
+    .wrapper.active .form-box.login .animation,
+    .wrapper.active .info-text.login .animation {
+        transition: 0.35s ease;
+        transition-delay: calc(0.025s * var(--i)) !important;
+    }
+
+    .wrapper .form-box.register .animation,
+    .wrapper .info-text.register .animation {
+        transition: 0.35s ease;
+        transition-delay: calc(0.025s * var(--j)) !important;
+    }
+
+    .wrapper.active .form-box.register .animation,
+    .wrapper.active .info-text.register .animation {
+        transition: 0.45s ease;
+        transition-delay: calc(0.03s * (var(--i) - 17)) !important;
+    }
+}
+
+/* Extra-compact phones (<= 375px wide) */
+@media (max-width: 375px) {
+    body {
+        padding: 12px 10px;
+    }
+
+    .wrapper {
+        height: 490px;
+    }
+
+    .wrapper.active {
+        height: 568px;
+    }
+
+    .wrapper .form-box {
+        padding: 4px 20px 14px !important;
+    }
+
+    .wrapper .info-text h2 {
+        font-size: 20px;
+    }
+
+    .wrapper .info-text p {
+        font-size: 11.5px;
+    }
+}
